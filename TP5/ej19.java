@@ -9,7 +9,7 @@ public class ej19 {
     posición del arreglo como cantidad de ocurrencias del número).
  */
 public static void main(String[] args) {
-    int[] arr={1,2,3,5,5,6,7,8,9,10};
+    int[] arr={1,2,3,5,5,8,7,8,9,8};
     System.out.println("ingrese un numero ");
     int num=Utils.leerInt();
     mostrarArregloInt(arr);
@@ -22,6 +22,7 @@ public static void eliminarTodasOcurrencias(int[] arr, int num) {
     while (i < MAX) {
         if (arr[i] == num) {
             corrimientoIzquierda(arr, i);
+            arr[MAX-1]=0;
             // No incrementamos i, ya que el nuevo valor en arr[i] puede ser también num
         } else {
             i++;
