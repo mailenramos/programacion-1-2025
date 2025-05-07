@@ -11,18 +11,13 @@ public class ej21 {
         while(arr[max]<num){
             arr[max]=arr[max-1];
             max--;
+            
             if(arr[max]>num){
                 arr[max+1]=num;
             }
         }
 
         mostrarArregloInt(arr);
-    }
-
-    public static void corrimientoDerecha(int[]arr,int pos){
-        for(int i=MAX-1;i>pos;i--){
-            arr[i]=arr[i-1];
-        }
     }
 
     public static void mostrarArregloInt(int[]arr){
