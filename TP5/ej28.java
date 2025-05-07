@@ -55,15 +55,6 @@ public class ej28 {
             pos++; 
         }
     }
-    public static int buscarTamanio(int ini,int fin) {
-        int tamanio=0;
-        while (ini<=fin) {
-            tamanio++;  
-            ini++;  
-        }
-        return tamanio;
-    }
-
     public static int buscarIni(int[] arr, int ini) {
         while (ini < MAX && arr[ini] == 0) {
             ini++;
@@ -83,4 +74,14 @@ public class ej28 {
         }
         System.out.println();
     }
+    public static int buscarTamanio(int ini,int fin) {
+        int tamanio=0;
+        while (ini<=fin) {
+            tamanio++;  
+            ini++;  
+        }
+        return tamanio;
+    }
+
+    
 }
