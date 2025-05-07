@@ -4,7 +4,7 @@ public class ej29 {
     static final int MAX = 20;
     static final int MAXPATRON = 2; 
     public static void main(String[] args) {
-        int[] arr = {0, 3, 2, 0, 5, 2, 7, 8, 0, 0, 1, 2, 3, 4, 0, 5, 6, 0, 0, 0};
+        int[] arr = {0, 1, 2, 0, 5, 2, 7, 8, 0, 0, 1, 2, 3, 4, 0, 5, 6, 0, 0, 0};
 
         mostrarArregloInt(arr);
         procesar(arr);
@@ -17,17 +17,14 @@ public class ej29 {
             inicio = buscarIni(arr, fin + 1);
             if (inicio < MAX) {
                 fin = buscarFin(arr, inicio);
-                System.out.println("llegó1");
-                if(esAscendente(arr,inicio,fin))
-                System.out.println("llegó2"+esAscendente(arr, inicio, fin));
+                if(esAscendente(arr,inicio,fin)){
                     eliminarSec(arr,inicio,fin);
                     fin = inicio - 1;
                 }
         }
-    }
+    }}
     
     public static boolean esAscendente(int[] arr, int ini, int fin) {
-        System.out.println("llegó3");
         if (ini >= fin) {
             return false;
         }
