@@ -1,72 +1,90 @@
 class parcial1{
-    static final int MAXM=20;
+    static final int MAXM=19;
     static final int MAXA=3;
     static final int SEPARADOR=0;
      public static void main (String[] args){
-        int[] M= {0,0,33,2,12, 25, 0, 32, 55, 12 ,3, 88 ,14 ,0 ,0, 17, 36 ,19, 0, 0};
+        int[] M= {0,0,34,2,12,25,0,32,12,3,88,14,0,0,17,36,19,0,0};
         int[] A= {2,3,6};
 
-        mostrarArreglo(M,MAXM);
-        mostrarArreglo(A,MAXA);
+        mostrarArreglo(A, MAXA);
+        mostrarArreglo(M, MAXM);
         Procesar(M,A);
-        mostrarArreglo(M,MAXM);
-        mostrarArreglo(A,MAXA);
+        System.out.println("-----------------");
+        mostrarArreglo(A, MAXA);
+        mostrarArreglo(M, MAXM);
     }
 
     public static void Procesar ( int[] M , int[] A){
-          int ini=0, fin=-1;
-    
+          int ini=0;
+          int fin=-1;
+
           while (ini<MAXM){
-                     ini=BuscarInicio(M,fin+1);
-                     if (ini<MAXM){
-                          fin=BuscarFin(M,ini);                    
-                          AsignarAula(M,A,ini,fin);                     
-                     } 
+                     ini=BuscarInicio(M,ini);
+                    if (ini<MAXM){
+                          fin=BuscarFin(M,ini);
+                                              
+                          if (EncuentraAulas(M,A,ini,fin)){
+                            mostrarArreglo(M,MAXM);
+                            BorrarMateria(M,ini,fin+1); 
+                            mostrarArreglo(M,MAXM);
+                          }
+                          else {
+                                ini = fin + 1; // solo si no se asignó, avanzar normalmente
+                          }  
+                                            
+                    }       
           }
     }
-    public static void AsignarAula( int[] M,  int[] A, int ini,  int fin){
-      int CantAlumnos=SacarCantAlumnos(ini,fin);
+
+    public static boolean EncuentraAulas( int[] M,  int[] A, int ini,  int fin){
+      int CantAlumnos=fin-ini+1;
+      boolean encontro=false;
       int i=0;
-          while( i<MAXA  &&  A[i]<  CantAlumnos && A[i]>0){
+
+          while( i<MAXA  &&  !encontro){
+            System.out.println("inicio sec "+ini+" fin sec "+fin+" largo "+CantAlumnos);
                   if(A[i]>=CantAlumnos){
-                       A[i]*= -1;
-                       EliminarMateria(M,ini);
-                        fin=ini-1;
-                  }else{
-                        System.out.println("No se pudo asignar la materia, la conservaremos");
-                   } 
-                  i++;
-           }
+                       BorrarAula(A,i);
+                       encontro=true;
+                  }
+                   i++;
+                } 
+    return encontro;
     }
-        public static void EliminarMateria(int[]M,int ini){
-             while(ini<=MAXM){
-                    CorrerIzquierda(M,ini);
-                     ini++;
-              }
+    public static void BorrarAula(int[]A,int pos){
+        A[pos] = -A[pos];
+    }
+    
+    public static void BorrarMateria(int[]M,int ini,int fin){
+        for(int i=ini;i<=fin;i++){
+            CorrerIzquierda(M,ini);
+            }
          }
-          public static void CorrerIzquierda(int[]M,int pos){
-                 while(pos<MAXM){
-                            M[pos]=M[pos+1];
-                             pos++;
-                    }                     
+    public static void CorrerIzquierda(int[]M,int pos){
+        int i=pos;
+        while(i<MAXM-1){
+            M[i]=M[i+1];
+            i++;
+        }
+        M[MAXM-1]=SEPARADOR;                     
     }      
            
     public static int BuscarInicio(int[]arr,int pos){
-          while(pos<MAXM && arr[pos]==SEPARADOR){
-                 pos++;
+        int i=pos;
+          while(i<MAXM && arr[i]==SEPARADOR){
+                 i++;
           }
-    return pos;
+    return i;
     }
     
     public static int BuscarFin(int[]arr,int pos){
-     while(pos<MAXM && arr[pos]!=SEPARADOR){
-     pos++;
+        int i = pos;
+     while(i<MAXM && arr[i]!=SEPARADOR){
+     i++;
      }
-    return pos-1;}
+    return i-1;
+}
 
-    public static int SacarCantAlumnos(int ini , int fin){
-         return fin-ini+1;
-    }
     public static void mostrarArreglo(int[]arr,int MAX){
         for(int i=0;i<MAX;i++){
             System.out.print(arr[i]+" |");
