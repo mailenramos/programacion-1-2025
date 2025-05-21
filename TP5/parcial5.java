@@ -4,7 +4,7 @@ public class parcial5 {
     public static void main(String[] args) {
         int[]empanadas={-1,5,5,7,7,-6,4,9,10,-4,1,1,2,7,-9,-8};
         System.out.println("ingrese la empanada que desea agregar");
-        int empanada=Utils.leerInt();
+        int empanada=ingresarEmpanadaValida();
         System.out.println("ingrese el pedido");
         int pedido=Utils.leerInt();
         agregarEmpanada(empanadas,empanada,pedido);
@@ -75,5 +75,14 @@ public class parcial5 {
             System.out.print("| "+arr[i]);
         }
         System.err.println();
+    }
+    public static int ingresarEmpanadaValida(){
+        int empanada=Utils.leerInt();
+        while(empanada<0){
+            System.out.println("Ingrese una empanada mayor a 0");
+            empanada=Utils.leerInt();
+        }
+        
+        return empanada;
     }
 }
