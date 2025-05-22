@@ -36,15 +36,6 @@ public class parcial5 {
             incorporarEmpanada(empanadas,posEmpanada,empanada);
         }
     }
-    public static void incorporarEmpanada(int[]empanadas,int pos, int empanada){
-        correrDerecha(empanadas,pos);
-        empanadas[pos]=empanada;
-    }
-    public static void correrDerecha(int[]arr, int pos){
-        for(int i=MAXE-1; i>pos;i--){
-            arr[i]=arr[i-1];
-        }
-    }
     public static int buscarPosEmpanada(int[]empanadas, int ini,int fin, int empanada) {
         int i = ini;
         while(i<fin && empanadas[i]<empanada){
@@ -53,8 +44,18 @@ public class parcial5 {
         }
         return i;
     }
+    
+    public static void incorporarEmpanada(int[]empanadas,int pos, int empanada){
+        correrDerecha(empanadas,pos);
+        empanadas[pos]=empanada;
+    }
 
-
+    public static void correrDerecha(int[]arr, int pos){
+        for(int i=MAXE-1; i>pos;i--){
+            arr[i]=arr[i-1];
+        }
+    }
+    
     public static int buscarInicio(int[]arr,int pos){
         int i=pos;
         while(i<MAXE && arr[i]<=0){
@@ -76,6 +77,7 @@ public class parcial5 {
         }
         System.err.println();
     }
+    
     public static int ingresarEmpanadaValida(){
         int empanada=Utils.leerInt();
         while(empanada<0){
