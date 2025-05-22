@@ -1,0 +1,76 @@
+public class parcial6MAI {
+    static final int MAXP = 28;
+    static final int MAXR = 2;
+    static final int SEPARADOR = 0;
+
+    public static void main(String[] args) {
+        int[] P = {0, 0, 9, 12, 18, 0, 1, 5, 43, 73, 88, 0, 8, 9, 52, 0, 1, 10, 90, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int[] R = {44, 6};
+
+        incorporarPromocion(P, R);
+        System.out.println("Después de insertar:");
+        mostrarArreglo(P);
+    }
+
+    public static void incorporarPromocion(int[] P, int[] R) {
+        int ini = 0, fin = -1;
+        int prodAgregados=0;
+
+        while (ini < MAXP) {
+            ini = buscarInicio(P, fin + 1);
+            if (ini < MAXP) {
+                fin = buscarFin(P, ini);
+                for (int i = 0; i < MAXR; i++) {
+                    int producto = R[i];
+                    int pos = buscarPosicion(P, ini, fin, producto);
+                    insertarProducto(P, pos, producto);
+                    fin++;
+                    prodAgregados++;
+                }
+            }
+        }
+        System.out.println("productos agregados:"+prodAgregados);
+    }
+
+    public static int buscarPosicion(int[] P, int ini, int fin, int producto) {
+        int i = ini;
+        while (i <= fin && P[i] < producto) {
+            i++;
+        }
+        return i;
+    }
+
+    public static void insertarProducto(int[] P, int pos, int producto) {
+        correrDerecha(P, pos);
+        P[pos] = producto;
+    }
+
+    public static void correrDerecha(int[] arr, int pos) {
+        for (int i = MAXP - 1; i > pos; i--) {
+            arr[i] = arr[i - 1];
+        }
+    }
+
+    public static int buscarInicio(int[] arr, int pos) {
+        int i = pos;
+        while (i < MAXP && arr[i] == SEPARADOR) {
+            i++;
+        }
+        return i;
+    }
+
+    public static int buscarFin(int[] arr, int pos) {
+        int i = pos;
+        while (i < MAXP && arr[i] != SEPARADOR) {
+            i++;
+        }
+        return i - 1;
+    }
+
+    public static void mostrarArreglo(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print("| " + arr[i]);
+        }
+        System.out.println();
+    }
+}
