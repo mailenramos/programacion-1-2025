@@ -1,4 +1,4 @@
-package parciales;
+
 /*El bar Tito recibe todos los días comensales y debe tratar de ubicar las mesas lo más eficientemente posible 
 para optimizar el uso del salón. Para ello cada cliente que ingresa se registra ingresando la cantidad de 
 personas que van a ocupar una mesa. El registro se realiza en un arreglo C de tamaño MAXC inicializado con 
@@ -30,7 +30,7 @@ Las asignaciones deben ser impresas por consola. En este ejemplo, las asignacion
 asignó a la mesa 2”, “El cliente 2 se asignó a la mesa 1”, “El cliente 3 se asignó a la mesa 4”, “El cliente 4 se 
 asignó a la mesa 3”,  “El cliente 5 se asignó a la mesa 0” y “No quedan más mesas para asignar clientes” 
 El arreglo C resultante sería: */
-public class asignacionMesas {
+public class asignacionMesasCompa{
     static final int M=20 ,MAXARR=5;
     public static void main(String[] args) {
         int[]arr={4,3,8,6,2,12,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
