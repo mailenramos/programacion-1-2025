@@ -20,24 +20,30 @@ public class parcial6MAI {
             ini = buscarInicio(P, fin + 1);
             if (ini < MAXP) {
                 fin = buscarFin(P, ini);
-                for (int i = 0; i < MAXR; i++) {
-                    int producto = R[i];
-                    int pos = buscarPosicion(P, ini, fin, producto);
-                    insertarProducto(P, pos, producto);
-                    fin++;
-                    prodAgregados++;
-                }
+                prodAgregados+=agregarProm(R,ini,fin,P);
+                
             }
         }
         System.out.println("productos agregados:"+prodAgregados);
     }
+    public static int agregarProm(int []R,int ini,int fin,int[]P) {
+        int prodAgregados=0;
+        for (int i = 0; i < MAXR; i++) {
+            int producto = R[i];
+            int pos = buscarPosicion(P, ini, fin, producto);
+            insertarProducto(P, pos, producto);
+            fin++;
+            prodAgregados++;
+        }
+        return prodAgregados;
+    }
 
     public static int buscarPosicion(int[] P, int ini, int fin, int producto) {
-        int i = ini;
-        while (i <= fin && P[i] < producto) {
-            i++;
+        int pos = ini;
+        while (pos <= fin && P[pos] < producto) {
+            pos++;
         }
-        return i;
+        return pos;
     }
 
     public static void insertarProducto(int[] P, int pos, int producto) {

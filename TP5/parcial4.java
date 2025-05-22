@@ -32,11 +32,11 @@ public class parcial4 {
         int promosDisponibles=2;
         int R= 22;
 
-        while(ini<MAXP){
+        while(ini<MAXP && pedidosAsignados<MAXT){
                 ini=buscarInicio(pedidos,fin+1);
                 if(ini<MAXP){
                     fin=buscarFin(pedidos,ini);
-                        if(encuentraOcurrencias(pedidos,ini,fin,T)&& pedidosAsignados<MAXT){
+                        if(encuentraOcurrencias(pedidos,ini,fin,T)){
                         agregarPromocion(pedidos,fin,R);
                         pedidosAsignados++;
                         promosDisponibles--;
