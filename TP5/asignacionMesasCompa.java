@@ -1,4 +1,3 @@
-
 /*El bar Tito recibe todos los días comensales y debe tratar de ubicar las mesas lo más eficientemente posible 
 para optimizar el uso del salón. Para ello cada cliente que ingresa se registra ingresando la cantidad de 
 personas que van a ocupar una mesa. El registro se realiza en un arreglo C de tamaño MAXC inicializado con 
@@ -44,7 +43,9 @@ public class asignacionMesasCompa{
     }
     public static int asignarMesasAClientes(int[]clientes,int[]mesa){
         int cliente = 0;
-        int cantMesasAsign = 0,mesasTotales = MAXARR,mesaDisp = -1;
+        int cantMesasAsign = 0;
+        int mesasTotales = mesa.length;
+        int mesaDisp = -1;
         int i=0;
 
         while(clientes[i]!=0&&i<M){
