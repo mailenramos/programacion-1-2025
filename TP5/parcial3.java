@@ -30,14 +30,12 @@ public class parcial3 {
         int materia = 0;
         int ini=0, fin=-1;
 
-        while(ini<MAXM){
+        while(ini<MAXM && aulasAsignadas<MAXA){
             ini=buscarInicio(materias,fin+1);
             if(ini<MAXM){
                 fin=buscarFin(materias,ini);
                 materia++;
                 int cantAlumnos = fin-ini+1;
-
-                if(aulasAsignadas<MAXA){
                     aulaDisponible=obtenerAulaDisponible(aulas,cantAlumnos);
                     if(aulaDisponible!=-1){
                         asignarAula(aulas,aulaDisponible);
@@ -48,9 +46,6 @@ public class parcial3 {
                     }else{
                         System.out.println("La materia "+materia+" no se pudo asignar");
                     }
-                }else{
-                    System.out.println("Ya no hay aulas disponibles");
-                }
                 
             }
         }
