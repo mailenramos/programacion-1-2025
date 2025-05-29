@@ -27,14 +27,17 @@ public class parcial9 {
 
     public static boolean patronAlDescubierto(char[]mensaje, int ini, int fin){
         boolean patronInseguro=false;
-        int strike=0;
-        for(int i=ini;i<fin;i++){
-            if(mensaje[i]==mensaje[i+1]){
-                strike++;
+        int repeticiones=1;
+        for(int i=ini+1;i<=fin;i++){
+            if(mensaje[i]==mensaje[i-1]){
+               repeticiones++;
+               if(repeticiones>=MAXC){
+                    patronInseguro=true;    
+               }
+            }else{
+                repeticiones=1;
             }
         }
-        if(strike==MAXC-1)
-            patronInseguro=true;
 
         return patronInseguro;
     }
