@@ -1,4 +1,4 @@
-public class parcial6 {
+public class parcial6MAI {
     static final int MAXP = 28;
     static final int MAXR = 2;
     static final int SEPARADOR = 0;
@@ -7,40 +7,30 @@ public class parcial6 {
         int[] P = {0, 0, 9, 12, 18, 0, 1, 5, 43, 73, 88, 0, 8, 9, 52, 0, 1, 10, 90, 0, 0, 0, 0, 0, 0, 0, 0, 0};
         int[] R = {44, 6};
 
-        int productosRegalados=incorporarPromocion(P, R);
+        incorporarPromocion(P, R);
+        System.out.println("Después de insertar:");
         mostrarArreglo(P);
-        System.out.println("La cantidad de productos regalados es: "+productosRegalados);
     }
 
-    public static int incorporarPromocion(int[] P, int[] R) {
-        int ini = 0, fin = -1,productosRegalados=0;
-     
+    public static void incorporarPromocion(int[] P, int[] R) {
+        int ini = 0, fin = -1;
+        int prodAgregados=0;
+
         while (ini < MAXP) {
             ini = buscarInicio(P, fin + 1);
             if (ini < MAXP) {
                 fin = buscarFin(P, ini);
-                int i=0;
-                while(i<MAXR){
-                    int producto=R[i];
-                    asignarPromo(P,ini,fin,producto);
-                    i++;
+                for (int i = 0; i < MAXR; i++) {
+                    int producto = R[i];
+                    int pos = buscarPosicion(P, ini, fin, producto);
+                    insertarProducto(P, pos, producto);
                     fin++;
-                    productosRegalados++;
+                    prodAgregados++;
                 }
             }
-            
         }
-        return productosRegalados;
+        System.out.println("productos agregados:"+prodAgregados);
     }
-       // System.out.println("productos agregados:"+prodAgregados);
-    
-
-    public static void asignarPromo(int[]P,int ini,int fin,int producto){
-            int pos=buscarPosicion(P, ini, fin,producto);
-            insertarProducto(P, pos, producto);
-             
-        }
-        
 
     public static int buscarPosicion(int[] P, int ini, int fin, int producto) {
         int pos = ini;

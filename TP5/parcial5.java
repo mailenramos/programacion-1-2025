@@ -13,32 +13,29 @@ public class parcial5 {
     public static void agregarEmpanada(int[] empanadas,int empanada,int pedido) {
         int ini=0, fin=-1;
         int pedidos=0;
-        int iniPedido=0;
-        int finPedido=0;
-             while (ini<MAXE) {
+        boolean asigno=false;
+        while (ini<MAXE && !asigno ) { 
             ini=buscarInicio(empanadas, fin+1);
             if(ini<MAXE){
                 fin=buscarFin(empanadas, ini);
                 pedidos++;
-                System.out.println("inicio: "+ini+" fin: "+ fin);
                 if(pedido==pedidos){
-                    iniPedido=ini;
-                    finPedido=fin;
+                    agregarEmpanada(ini,fin,empanadas,empanada);
+                    asigno=true;
                 }
-                
             }
-            
         }
-        if(iniPedido==0 && finPedido==0){
-            System.out.println("El pedido "+pedido+" no existe");
-        }else{
-            int posEmpanada=buscarPosEmpanada(empanadas,iniPedido,finPedido,empanada);
-            incorporarEmpanada(empanadas,posEmpanada,empanada);
-        }
+        if(!asigno)
+        System.out.println("No existe ese pedido");
+       
+    }
+    public static void agregarEmpanada(int ini,int fin,int[]empanadas,int empanada) {
+    int pos=buscarPosEmpanada(empanadas, ini, fin, empanada);
+    incorporarEmpanada(empanadas, pos, empanada);
     }
     public static int buscarPosEmpanada(int[]empanadas, int ini,int fin, int empanada) {
         int i = ini;
-        while(i<fin && empanadas[i]<empanada){
+        while(i<=fin && empanadas[i]<empanada){
 
             i++;
         }

@@ -26,21 +26,20 @@ public class parcial4 {
 
     }
     public static int asignarProductoPromocionado(int[]pedidos,int[]T){
-        int i=0;
         int pedidosAsignados=0;
         int ini=0, fin = -1;
         int promosDisponibles=2;
         int R= 22;
 
         while(ini<MAXP && pedidosAsignados<MAXT){
-                ini=buscarInicio(pedidos,fin+1);
-                if(ini<MAXP){
-                    fin=buscarFin(pedidos,ini);
-                        if(encuentraOcurrencias(pedidos,ini,fin,T)){
-                        agregarPromocion(pedidos,fin,R);
-                        pedidosAsignados++;
-                        promosDisponibles--;
-                        }
+            ini=buscarInicio(pedidos,fin+1);
+            if(ini<MAXP){
+                fin=buscarFin(pedidos,ini);
+                    if(encuentraOcurrencias(pedidos,ini,fin,T)){
+                    agregarPromocion(pedidos,fin,R);
+                    pedidosAsignados++;
+                    promosDisponibles--;
+                    }
             }
         }
         return promosDisponibles;
