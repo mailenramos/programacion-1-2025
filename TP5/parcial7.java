@@ -18,42 +18,72 @@ public class parcial7 {
         char[]arrNoE=new char[MAX];
         char[]arrNoI=new char[MAX];
 
-        registrarPatentes(arrE,arrI,arrNoE,arrNoI);
+        registrarEgresos(arrE,arrI,arrNoE,arrNoI);
+        mostrarArreglo(arrNoI);
     }
     
-    public static void registrarPatentes(char[]arrE,char[]arrI,char[]arrNoE,char[]arrNoI){
+    public static void registrarEgresos(char[]arrE,char[]arrI,char[]arrNoE,char[]arrNoI){
         int ini=0,fin=-1;
+        int cantEgresos=0;
+        int iniNoEgreso=0,finNoEgreso=0;
+
 
         while(ini<MAX){
             ini=buscarInicio(arrI,fin+1);
             if(ini<MAX){
                 fin=buscarFin(arrI,ini);
-
-                buscarPatentes(arrI,ini,fin,arrE);
-                
+                cantEgresos=buscarEgresos(arrI,ini,fin,arrE);
+                if(cantEgresos==0){
+                    iniNoEgreso=ini;
+                    finNoEgreso=fin;
+                    System.out.println("ini: "+iniNoEgreso+" fin: "+finNoEgreso);
+                    insertarPatente(arrNoE,iniNoEgreso,finNoEgreso,arrI);
+                }
             }
         }
     }
 
-    public static void buscarPatentes(char[]arrI,int ini,int fin,char[]arrE){
+    public static void insertarPatente(char[]arrNoE,int ini,int fin,char[]arrI){
+        int i=1;
+        int j=ini;
+        int largo=fin-ini+1;
+        while(i<MAX && i<largo){
+            arrNoE[i]=arrI[j];
+            i++;
+            j++;
+        }
+    }
+
+    public static int buscarEgresos(char[]arrI,int ini,int fin,char[]arrE){
         int ini2=0, fin2=-1;
-        int i =0;
-        int ubicacionPatente=0;
-        
-        
+        int largo1=fin-ini+1;
+        int cantEgresos =0;
         while(ini2<MAX){
-            ini2=buscarInicio(arrE,fin+1);
+            ini2=buscarInicio(arrE,fin2+1);
             if(ini2<MAX){
-                fin2=buscarFin(arrE,ini);
-                ubicacionPatente++;
-                if((fin-ini+1)==(fin2-ini2+1)){
-                    i=compararPatentes(arrI,ini,fin,arrE,ini2);
-                    if(i!=fin){
-                        System.out.println("La patente "+ubicacionPatente+" no egresó");
-                    }
+                fin2=buscarFin(arrE,ini2);
+                int largo2=fin2-ini2+1;
+
+                boolean salio = comprobarEgreso(largo1,largo2,arrI,ini,fin,arrE,ini2);
+                if(salio){
+                    cantEgresos++;
                 }
             }
         }
+        return cantEgresos;
+    }
+    
+    public static boolean comprobarEgreso(int largo1,int largo2,char[]arrI,int ini,int fin,char[]arrE,int ini2){
+        boolean salio=false;
+
+        if(largo1==largo2){
+                    int i=compararPatentes(arrI,ini,fin,arrE,ini2);
+                    if(i==fin){
+                        salio=true;
+                    }
+                }
+
+        return salio;
     }
 
     public static int compararPatentes(char[]arrI,int ini,int fin,char[]arrE,int ini2){
