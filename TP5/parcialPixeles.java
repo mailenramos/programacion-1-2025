@@ -25,7 +25,7 @@ public class parcialPixeles {
                 fin=buscarFin(pixeles,ini);
                     int largo=fin-ini+1;
                     repeticiones=buscarCoincidencias(pixeles,ini,fin,x,largo);
-                    if(repeticiones>=x && repeticiones==largo){
+                    if(repeticiones>=x){
                         eliminarSecuencia(pixeles,ini,fin,repeticiones);
                         fin=ini-1;
                         insertarNumero(pixeles,ini,repeticiones);
