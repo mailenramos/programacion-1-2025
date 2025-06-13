@@ -41,6 +41,7 @@ está, realizar un corrimiento a izquierda y no continuar buscando */
             ini=buscarInicio(arr,fin+1);
             if(ini<MAXCOLUM){
                 fin=buscarFin(arr,ini);
+                
                 int pos=encuentraNumero(arr,ini,fin,numero);
                 if(pos<=fin){
                     correrIzquierda(arr,pos);
