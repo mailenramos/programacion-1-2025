@@ -4,7 +4,7 @@ public class ejercicio5 {
 entero y elimine la primera ocurrencia de número en la matriz (un
 número igual) si existe. Para ello tendrá que buscar la posición y si
 está, realizar un corrimiento a izquierda y no continuar buscando */
-     static final int MAXFILA=5;
+    static final int MAXFILA=5;
     static final int MAXCOLUM=10;
     static final int SEPARADOR=0;
 

@@ -1,76 +1,89 @@
-/*
-Se debe implementar un programa que verifique, que todos los autos que ingresaron hayan también egresado del predio. 
-En caso de detectar algún vehículo que no haya egresado se debe almacenar la patente en un arreglo arrNoE.
-De igual manera, puede ocurrir que al ingreso del vehículo la patente no quede registrada pero si al egresar.
-En estos casos, se debe almacenar las patentes de los autos que no hayan quedado registrados en el arreglo
-arrI pero si en el arrE, en un arreglo arrNoI.
-
-Nota: los arreglos arrNoE y arrNoI son de tamaño MAXA y deben almacenar las patentes separadas por uno
-o más espacios.
-
- */
 public class parcial7MAI {
     static final int MAX = 25;
     static final char SEPARADOR = ' ';
+
     public static void main(String[] args) {
-        char[]arrI= {' ',' ','A','B','9','8','7','E','X',' ','A','A','1','2','3','Z','Z',' ','F','O','R','0','0','1',' '};
-        char[]arrE= {' ','A','A','1','2','3','Z','Z',' ','P','R','G','0','1','0',' ','A','B','9','8','7','E','X',' ',' '};
-        char[]arrNoE=new char[MAX];
-        char[]arrNoI=new char[MAX];
+        char[] arrI = {' ', ' ', 'A', 'B', '9', '8', '7', 'E', 'X', ' ', 'A', 'A', '1', '2', '3', 'Z', 'Z', ' ', 'F', 'O', 'R', '0', '0', '1', ' '};
+        char[] arrE = {' ', 'A', 'A', '1', '2', '3', 'Z', 'Z', ' ', 'P', 'R', 'G', '0', '1', '0', ' ', 'A', 'B', '9', '8', '7', 'E', 'X', ' ', ' '};
+        char[] arrNoE = new char[MAX];
+        char[] arrNoI = new char[MAX];
 
-        registrarPatentes(arrE,arrI,arrNoE,arrNoI);
+        registrarPatentes(arrE, arrI, arrNoE, arrNoI);
+
+        System.out.println("Patentes que ingresaron pero NO egresaron:");
+        mostrarArreglo(arrNoE);
+        System.out.println("Patentes que egresaron pero NO ingresaron:");
+        mostrarArreglo(arrNoI);
     }
-    
-    public static void registrarPatentes(char[]arrE,char[]arrI,char[]arrNoE,char[]arrNoI){
-        int ini=0,fin=-1;
-        int patente=0;
-        while(ini<MAX){
-            ini=buscarInicio(arrI,fin+1);
-            if(ini<MAX){
-                fin=buscarFin(arrI,ini);
-                patente++;
-                System.out.println("Patente "+patente+" ArrI");
-                Salio(arrI,ini,fin,arrE);
-                
+
+    public static void registrarPatentes(char[] arrE, char[] arrI, char[] arrNoE, char[] arrNoI) {
+        int ini = 0, fin = -1;
+        int posNoE = 0;
+
+        while (ini < MAX) {
+            ini = buscarInicio(arrI, fin + 1);
+            if (ini < MAX) {
+                fin = buscarFin(arrI, ini);
+                if (!existePatente(arrI, ini, fin, arrE)) {
+                    posNoE = copiarPatente(arrI, ini, fin, arrNoE, posNoE);
+                }
             }
-            System.out.println("------------------------------------------------");
         }
-    }
-    public static void Salio(char[]arrI,int ini,int fin,char[]arrE) {
-         int iniE=0,finE=-1;
-         int largoSec=fin-ini+1;
-         int patente=0;
-         boolean noSalio=false;
 
-        while(iniE<MAX){
-            iniE=buscarInicio(arrE,finE+1);
-            if(iniE<MAX){
-                finE=buscarFin(arrE,iniE);
-                patente++;
-                int largoSec2=finE-iniE+1;
-                
-                if( largoSec==largoSec2){
-                    int pos= VerificarIgualdad(arrI,ini,fin,arrE,iniE,finE);
-                     if(pos!=fin){
-                        noSalio=true;
-                     }
+        ini = 0;
+        fin = -1;
+        int posNoI = 0;
+
+        while (ini < MAX) {
+            ini = buscarInicio(arrE, fin + 1);
+            if (ini < MAX) {
+                fin = buscarFin(arrE, ini);
+                if (!existePatente(arrE, ini, fin, arrI)) {
+                    posNoI = copiarPatente(arrE, ini, fin, arrNoI, posNoI);
                 }
             }
         }
     }
 
-    public static int VerificarIgualdad(char[]arrI,int ini,int fin,char[]arrE,int iniE,int finE) {
-        int i=ini;
-        int iE=iniE;
+    public static boolean existePatente(char[] arrFuente, int iniF, int finF, char[] arrBusqueda) {
+        int ini = 0, fin = -1;
 
-        while (i<fin && arrI[i]==arrE[iE]){
-            i++;
-            iE++;    
+        while (ini < MAX) {
+            ini = buscarInicio(arrBusqueda, fin + 1);
+            if (ini < MAX) {
+                fin = buscarFin(arrBusqueda, ini);
+                if (compararPatentes(arrFuente, iniF, finF, arrBusqueda, ini, fin)) {
+                    return true;
+                }
+            }
         }
-        return i;
+
+        return false;
     }
 
-     public static int buscarInicio(char[] arr, int pos) {
+    public static boolean compararPatentes(char[] arr1, int ini1, int fin1, char[] arr2, int ini2, int fin2) {
+        if ((fin1 - ini1) != (fin2 - ini2)) 
+        return false;
+
+        for (int i = 0; i <= fin1 - ini1; i++) {
+            if (arr1[ini1 + i] != arr2[ini2 + i]) return false;
+        }
+        return true;
+    }
+
+    public static int copiarPatente(char[] origen, int ini, int fin, char[] destino, int pos) {
+        if (pos < MAX) {
+            for (int i = ini; i <= fin && pos < MAX; i++) {
+                destino[pos++] = origen[i];
+            }
+            if (pos < MAX) {
+                destino[pos++] = SEPARADOR;
+            }
+        }
+        return pos;
+    }
+
+    public static int buscarInicio(char[] arr, int pos) {
         int i = pos;
         while (i < MAX && arr[i] == SEPARADOR) {
             i++;
@@ -87,8 +100,8 @@ public class parcial7MAI {
     }
 
     public static void mostrarArreglo(char[] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print("| " + arr[i]);
+        for (char c : arr) {
+            System.out.print(c);
         }
         System.out.println();
     }
