@@ -37,7 +37,6 @@ class parcial2 {
 
     public static void cumplioEntrenamiento(double Progresivos, double diasTotales){
         double promedio = (Progresivos/diasTotales);
-
         System.out.println("El atleta cumplio con el entrenamiento? "+ (promedio>=P)); 
     }
 
