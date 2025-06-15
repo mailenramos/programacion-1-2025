@@ -1,4 +1,4 @@
-public class parcial8 {
+class parcial8 {
     static final int MAXFILA=3;
     static final int MAXCOLUM=15;
     static final int SEPARADOR=0;
