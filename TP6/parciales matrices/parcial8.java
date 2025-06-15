@@ -23,7 +23,7 @@ class parcial8 {
         }
     }
     public static int OrdenarASClasDESC(int []arr){
-        int ini=0,fin=-1;
+        int ini=0, fin=-1;
         int reordenamientos=0;
         while (ini<MAXCOLUM) {
             ini=buscarInicio(arr, fin+1);
@@ -37,24 +37,34 @@ class parcial8 {
         }
         return reordenamientos;
     }
+    public static boolean EsDesc(int [] arr,int ini,int fin) {
+        int i = ini;
+        while (i<=fin && arr[i]>=arr[i+1]) {
+            i++;
+        }
+
+        System.out.println("i es mayor al fin? "+(i>fin)+" i: "+i+" fin: "+fin);
+        
+        return i==fin;
+    }
+
+
+
+
+
     public static void Reordenar(int [] arr,int ini,int fin) {
         int largo=fin-ini+1;
-        while (ini<=largo/2) {
-            int valorviejo=arr[ini];
-            arr[ini]=arr[fin];
-            arr[fin]=valorviejo;
-            ini++;
-            fin--;
+        int i = ini;
+        int j = fin;
+        while (i<=largo/2) {
+            int aux=arr[i];
+            arr[i]=arr[j];
+            arr[j]=aux;
+            i++;
+            j--;
         }
     }
-    public static boolean EsDesc(int [] arr,int ini,int fin) {
-        while (ini<fin && arr[ini]>=arr[ini+1]) {
-            ini++;
-        }
-        System.out.println("entreee"+ (ini==fin));
-        System.out.println("ini "+ini+" fin "+fin);
-        return ini==fin;
-    }
+    
      public static int buscarInicio(int[] arr, int pos) {
         while (pos < MAXCOLUM && arr[pos] == SEPARADOR) {
             pos++;
