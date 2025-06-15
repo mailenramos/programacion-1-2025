@@ -1,4 +1,4 @@
-public class parcial8 {
+class parcial8 {
     static final int MAXFILA=3;
     static final int MAXCOLUM=15;
     static final int SEPARADOR=0;
@@ -15,7 +15,6 @@ public class parcial8 {
         int reordenamientos=0;
         while (fila<MAXFILA) {
                 reordenamientos=OrdenarASClasDESC(matriz[fila]);
-                System.out.println("reordenamientos "+reordenamientos);
                 if(reordenamientos>=X){
                     System.out.println("en el estante "+(fila+1)+" hubo al menos "+X+" reordenamiento");
                 }
@@ -40,9 +39,9 @@ public class parcial8 {
     public static void Reordenar(int [] arr,int ini,int fin) {
         int largo=fin-ini+1;
         while (ini<=largo/2) {
-            int valorviejo=arr[ini];
+            int temporal=arr[ini];
             arr[ini]=arr[fin];
-            arr[fin]=valorviejo;
+            arr[fin]=temporal;
             ini++;
             fin--;
         }
@@ -51,8 +50,6 @@ public class parcial8 {
         while (ini<fin && arr[ini]>=arr[ini+1]) {
             ini++;
         }
-        System.out.println("entreee"+ (ini==fin));
-        System.out.println("ini "+ini+" fin "+fin);
         return ini==fin;
     }
      public static int buscarInicio(int[] arr, int pos) {
