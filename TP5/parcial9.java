@@ -3,7 +3,7 @@ public class parcial9 {
     static final int MAXC = 3;
     static final char SEPARADOR = ' ';
     public static void main(String[] args) {
-        char[]mensaje={' ','h','o','l','a',' ','c','o','o','o',' ','e','s','s','s','s',' '};
+        char[]mensaje={' ','h','o','l','a',' ','c','a','x','o',' ','e','x','s','p','s',' '};
         int[]clave={1,2,3};
 
         encriptar(mensaje,clave);
