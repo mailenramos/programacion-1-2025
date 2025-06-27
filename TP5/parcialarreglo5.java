@@ -1,4 +1,4 @@
-public class parcial5 {
+public class parcialarreglo5 {
     static final int MAXE = 16;
 
     public static void main(String[] args) {
@@ -6,20 +6,20 @@ public class parcial5 {
         System.out.println("ingrese la empanada que desea agregar");
         int empanada=ingresarEmpanadaValida();
         System.out.println("ingrese el pedido");
-        int pedido=Utils.leerInt();
-        agregarEmpanada(empanadas,empanada,pedido);
+        int pedidoCliente=Utils.leerInt();
+        agregarEmpanada(empanadas,empanada,pedidoCliente);
         mostrarArreglo(empanadas);
     }
-    public static void agregarEmpanada(int[] empanadas,int empanada,int pedido) {
+    public static void agregarEmpanada(int[] empanadas,int empanada,int pedidoCliente) {
         int ini=0, fin=-1;
-        int pedidos=0;
+        int pedido=0;
         boolean asigno=false;
         while (ini<MAXE && !asigno ) { 
             ini=buscarInicio(empanadas, fin+1);
             if(ini<MAXE){
                 fin=buscarFin(empanadas, ini);
-                pedidos++;
-                if(pedido==pedidos){
+                pedido++;
+                if(pedidoCliente==pedido){
                     agregarEmpanada(ini,fin,empanadas,empanada);
                     asigno=true;
                 }
@@ -36,7 +36,6 @@ public class parcial5 {
     public static int buscarPosEmpanada(int[]empanadas, int ini,int fin, int empanada) {
         int i = ini;
         while(i<=fin && empanadas[i]<empanada){
-
             i++;
         }
         return i;

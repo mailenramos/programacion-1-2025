@@ -1,4 +1,4 @@
-public class parcial6 {
+public class parcialarreglo6 {
     static final int MAXP = 28;
     static final int MAXR = 2;
     static final int SEPARADOR = 0;
@@ -13,41 +13,43 @@ public class parcial6 {
     }
 
     public static int incorporarPromocion(int[] P, int[] R) {
-        int ini = 0, fin = -1,productosRegalados=0;
-     
+        int ini = 0, fin = -1;
+        int productosRegalados=0;
         while (ini < MAXP) {
             ini = buscarInicio(P, fin + 1);
-            if (ini < MAXP) {
-                fin = buscarFin(P, ini);
-                int i=0;
-                while(i<MAXR){
-                    int producto=R[i];
-                    asignarPromo(P,ini,fin,producto);
-                    i++;
-                    fin++;
-                    productosRegalados++;
-                }
+            if (ini<MAXP) {
+                fin=buscarFin(P, ini);
+                int productos=asignarPromociones(P, ini, fin,R);
+                productosRegalados+=productos;
+                fin=fin+productos;
             }
             
         }
         return productosRegalados;
     }
-       // System.out.println("productos agregados:"+prodAgregados);
-    
+    public static int asignarPromociones(int[] arr,int ini,int fin ,int[] R) {
+     int i=0;
+     int productosRegalados=0;
+
+        while(i<MAXR & productosRegalados<=MAXR){
+                asignarPromo(arr,ini,fin,R[i]);
+                i++;
+                fin++;
+                productosRegalados++;
+        }
+        return productosRegalados; 
+    }
 
     public static void asignarPromo(int[]P,int ini,int fin,int producto){
             int pos=buscarPosicion(P, ini, fin,producto);
             insertarProducto(P, pos, producto);
-             
-        }
-        
+    }    
 
     public static int buscarPosicion(int[] P, int ini, int fin, int producto) {
-        int pos = ini;
-        while (pos <= fin && P[pos] < producto) {
-            pos++;
+        while (ini <= fin && P[ini]<producto) {
+            ini++;
         }
-        return pos;
+        return ini;
     }
 
     public static void insertarProducto(int[] P, int pos, int producto) {

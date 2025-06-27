@@ -11,10 +11,11 @@ Por último, se debe indicar cuántos productos R quedaron sin agregar a los ped
 quedaron productos por agregar
  */
 
-public class parcial4 {
+public class parcialarreglo4 {
     static final int MAXP = 25;
     static final int MAXT = 2;
     static final int SEPARADOR = 0;
+    static final int R= 22;
 
     public static void main(String[] args) {
         int[]pedidos={0,0,12,9,18,0,15,5,4,7,10,0,8,9,12,0,19,10,9,0,0,0,0,0,0};
@@ -29,7 +30,7 @@ public class parcial4 {
         int pedidosAsignados=0;
         int ini=0, fin = -1;
         int promosDisponibles=2;
-        int R= 22;
+        
 
         while(ini<MAXP && pedidosAsignados<MAXT){
             ini=buscarInicio(pedidos,fin+1);
@@ -44,31 +45,24 @@ public class parcial4 {
         }
         return promosDisponibles;
     }
+    public static boolean encuentraOcurrencias(int[]pedidos,int ini, int fin,int[]T){
+        boolean encontro = false;
+        int i =0;
+        while(i<MAXT && !encontro){
+            encontro=TieneOcurrencia(pedidos,ini,fin,T[i]);
+            i++;
+        }
+        return encontro;
+    }
+    public static boolean TieneOcurrencia(int []arr,int ini,int fin,int producto) {
+        while (ini<=fin && arr[ini]!=producto) {
+            ini++;
+        }
+        return ini<fin;
+    }
     public static void agregarPromocion(int[]pedidos,int fin,int R){
         corrimientoDerecha(pedidos, fin);
         pedidos[fin+1]=R;
-    }
-    public static void corrimientoDerecha(int[]arr,int pos){
-        for(int i=MAXP-1; i>pos; i--){
-            arr[i]=arr[i-1];
-        }
-    }
-    public static boolean encuentraOcurrencias(int[]pedidos,int ini, int fin,int[]T){
-        boolean encontro = false;
-        int i =ini;
-        while(i<fin && !encontro){
-            int j = 0;
-            while(j<T.length && !encontro){
-                if(pedidos[i]==T[j]){
-                encontro=true;
-                }else{
-                    j++;
-                }
-            }
-        i++;
-        }
-
-        return encontro;
     }
 
     public static int buscarInicio(int[]arr,int pos){
@@ -91,5 +85,10 @@ public class parcial4 {
             System.out.print("| "+arr[i]);
         }
         System.err.println();
+    }
+     public static void corrimientoDerecha(int[]arr,int pos){
+        for(int i=MAXP-1; i>pos; i--){
+            arr[i]=arr[i-1];
+        }
     }
 }
